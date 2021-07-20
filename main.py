@@ -50,3 +50,48 @@ def row_col_consistency(row, col, num):
         elif one_c > (columns - 2 )/ 2 :
             return False
     return True
+
+def similarity_consistency_col(c, num):
+    col = takuzu[:, c]
+    str_col = ''
+    k = 0
+    while k < columns:
+        if k == c:
+            str_col = str_col + str(num)
+        else:
+            str_col += col[k]
+        k = k + 1
+    k = 0
+    while k < columns:
+        str1 = creat_string(takuzu[:, k])
+        if c != k :
+            if "-" not in str1 and '-' not in str_col :
+                if str_col == str1:
+                   return False
+        k = k + 1
+    return True
+
+def creat_string(arr):
+    str = ''
+    for i in range(len(arr)):
+       str = str + arr[i]
+    return str
+
+def similarity_consistency_row(r, num):
+    row = takuzu[r]
+    str_row = ''
+    k = 0
+    while k < rows:
+        if k == r:
+            str_row = str_row + str(num)
+        else:
+            str_row = str_row + row[k]
+        k = k + 1
+    k = 0
+    while k < rows:
+        if r != k :
+            if "-" not in creat_string(takuzu[k]) and '-' not in str_row :
+                if str_row == creat_string(takuzu[k]):
+                     return False
+        k = k + 1
+    return True
