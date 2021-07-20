@@ -95,3 +95,29 @@ def similarity_consistency_row(r, num):
                      return False
         k = k + 1
     return True
+
+def check_coordinate(i):
+    if 0 <= i < columns:
+        return True
+    return False
+
+def repeat_consistency_col(i ,j, num):
+    if check_coordinate(j-2) and takuzu[i][j - 1] == str(num) and takuzu[i][j - 2] == str(num):
+        return False
+    elif check_coordinate(j+2) and takuzu[i][j + 1] == str(num) and takuzu[i][j + 2] == str(num):
+        return False
+    elif check_coordinate(j-1) and check_coordinate(j+1) and takuzu[i][j - 1] == str(num) and takuzu[i][j + 1] == str(num):
+        return False
+    else:
+        return True
+
+def repeat_consistency_row(i ,j,num):
+    if check_coordinate(i-2) and takuzu[i - 1][j] == str(num) and takuzu[i - 2][j] == str(num):
+        return False
+    elif check_coordinate(i+2) and takuzu[i + 1][j] == str(num) and takuzu[i + 2][j] == str(num):
+        return False
+    elif check_coordinate(i+1) and check_coordinate(i-1) and takuzu[i + 1][j] == str(num) and takuzu[i - 1][j] == str(num):
+        return False
+    else:
+        return True
+        
