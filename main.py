@@ -159,3 +159,34 @@ def mac():
      if ac3(q,queue2.pop()):
          queue2.append(q)
      return queue
+def mrv(domains, select, n, backtrack):
+    k = 0
+    bol = False
+    if backtrack != 0:
+        for i in range(len(domains)):
+            if n == domains[i]:
+                res = domains.index(n)
+                if res == len(domains) - 1:
+                    bol = True
+                    return bol, domains, select
+                else:
+                    select.append(domains[res + 1])
+                    k = res + 1
+    else:
+        select.append(domains[0])
+    i, backtrack = domains[k][1][2]
+    takuzu[i][backtrack] = str(domains[k][1][1][0])
+    print(takuzu)
+    print("___________________________")
+    domains.remove(domains[k])
+    bol = False
+    return bol, domains, select
+def can_solve(selected , select):
+    n = 0
+    for s in selected:
+        if s == select:
+            n += 1
+    if n == pow(rows, 3):
+        print("puzzle can not solve")
+        return False
+    return True
