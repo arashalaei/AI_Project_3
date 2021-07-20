@@ -120,4 +120,21 @@ def repeat_consistency_row(i ,j,num):
         return False
     else:
         return True
+def assignment(i , j):
+    num_of_domain = 0
+    domain = []
+    for k in range(2):
+        if not row_col_consistency(i,j,k) or not similarity_consistency_row(i,k) or not similarity_consistency_col(j,k) or not repeat_consistency_row(i,j,k) or not repeat_consistency_col(i,j,k):
+            continue
+        else:
+            domain.append(k)
+            num_of_domain += 1
+    return num_of_domain, domain
+def create_queue():
+    queue = []
+    for i in range(rows):
+        for j in range(columns):
+           p = [i , j]
+           queue.append(p)
+    return queue
         
