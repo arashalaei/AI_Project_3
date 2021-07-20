@@ -137,4 +137,25 @@ def create_queue():
            p = [i , j]
            queue.append(p)
     return queue
-        
+def ac3(p1,p2):
+    change = False
+    map = np.copy(takuzu)
+    number_of_domain_1, domain_1 = assignment(p1[0],p1[1])
+    number_of_domain_2, domain_2 = assignment(p2[0],p2[1])
+    if number_of_domain_2 != 1:
+        return change
+    elif number_of_domain_2 == 1:
+        map[p2[0]][p2[1]] = str(domain_2[0])
+        number_of_domain_1_1, domain_1_1 = assignment(p1[0],p1[1])
+        change = not np.array_equal(domain_1,domain_1_1)
+        return change        
+def mac():
+ queue1 = create_queue()
+ queue2 = create_queue()
+ queue = domain_queue()
+ for q in queue1:
+     if len(queue2) == 0 :
+         break
+     if ac3(q,queue2.pop()):
+         queue2.append(q)
+     return queue
