@@ -190,3 +190,39 @@ def can_solve(selected , select):
         print("puzzle can not solve")
         return False
     return True
+
+def backtracking_mac():
+    domains, back = mac()
+    select = []
+    selected = []
+    lc = backtrack = counter = 0
+    while True:
+        back = False
+        while not back:
+            if '-' not in takuzu:
+                print("puzzle solved")
+                quit()
+            if counter != 0 and backtrack == 0:
+                backtrack += 1
+                end, v, select = mrv(domains, select, lc, backtrack)
+                if end:
+                    break
+            else:
+                back, v, select = mrv(domains, select, 0, 0)
+            domains, back = mac()
+        backtrack = 0
+        selected.append(select)
+        if not can_solve(selected ,select):
+            quit()
+        takuzu[select[-1][1][2][0]][select[-1][1][2][1]] = '-'
+        lc = select[-1]
+        domains, end = mac()
+        select.pop(-1)
+        counter = counter + 1
+
+
+if __name__ == "__main__":
+    file_names = "puzzle4.txt"
+    print("mac")
+    backtracking_mac()
+
