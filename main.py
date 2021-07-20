@@ -209,6 +209,35 @@ def can_solve(selected , select):
         return False
     return True
 
+def backtracking_forward_checking():
+    domains, back = forward_cheking()
+    select = []
+    selected = []
+    lc = backtrack = counter = 0
+    while True:
+        back = False
+        while not back:
+            if '-' not in takuzu:
+                print("puzzle solved")
+                quit()
+            if counter != 0 and backtrack == 0 :
+                backtrack += 1
+                end, v, select = mrv(domains, select, lc, backtrack)
+                if end:
+                    break
+            else:
+                back, v, select = mrv(domains, select, 0, 0)
+            domains, back = forward_cheking()
+        backtrack = 0
+        selected.append(select)
+        if not can_solve(selected ,select):
+            quit()
+        takuzu[select[-1][1][2][0]][select[-1][1][2][1]] = '-'
+        lc = select[-1]
+        domains, end = forward_cheking()
+        select.pop(-1)
+        counter = counter + 1
+
 def backtracking_mac():
     domains, back = mac()
     select = []
