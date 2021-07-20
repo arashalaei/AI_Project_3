@@ -130,6 +130,24 @@ def assignment(i , j):
             domain.append(k)
             num_of_domain += 1
     return num_of_domain, domain
+
+def forward_cheking():
+    domains = {}
+    counter = 0
+    backtrack = False
+    for row in range(rows):
+        for col in range(columns):
+            if takuzu[row][col] == '-':
+                num_of_domains, domain = assignment(row, col )
+                domains.setdefault(counter, []).append(num_of_domains)
+                domains.setdefault(counter, []).append(domain)
+                domains.setdefault(counter, []).append((row, col))
+                counter += 1
+                if len(domain) == 0:
+                    backtrack = True
+    queue = sorted(domains.items(), key=lambda x: x[1])
+    return queue, backtrack
+
 def create_queue():
     queue = []
     for i in range(rows):
